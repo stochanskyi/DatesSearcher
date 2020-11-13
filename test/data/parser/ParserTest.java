@@ -39,8 +39,8 @@ public class ParserTest {
                 "elit"
         );
 
-        var actualReesult = new Parser().parseByWhitespaces(input);
+        var actualResult = new Parser().parseByWhitespaces(input);
 
-        assertEquals(expectedResult, actualReesult);
+        assertEquals(expectedResult, actualResult);
     }
 }

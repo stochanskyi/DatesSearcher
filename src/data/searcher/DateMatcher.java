@@ -18,7 +18,6 @@ public class DateMatcher {
      */
     public String matches(String stringValue) {
 
-
         for (String key : matcherMap.keySet()) {
             if (matcherMap.get(key).matches(stringValue)) {
                 return key;
