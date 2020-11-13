@@ -21,11 +21,17 @@ public class Parser {
         ArrayList<String> sentences = new ArrayList<>();
 
         StringBuilder sentence = new StringBuilder();
-        for (char s : text.toCharArray()) {
+        for (int i = 0; i < text.length(); ++i)  {
+            char s = text.toCharArray()[i];
             sentence.append(s);
 
-            if (isDot(s)) {
-                sentences.add(sentence.toString().trim());
+            if (i == text.toCharArray().length - 1) {
+                sentences.add(sentence.toString());
+                sentence = new StringBuilder();
+                continue;
+            }
+            if (isDot(s) && isWhitespace(text.toCharArray()[i + 1])) {
+                sentences.add(sentence.toString());
                 sentence = new StringBuilder();
             }
         }
