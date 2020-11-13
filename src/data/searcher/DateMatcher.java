@@ -1,6 +1,7 @@
 package data.searcher;
 
 import java.util.List;
+import java.util.Map;
 
 public class DateMatcher {
 
@@ -8,12 +9,25 @@ public class DateMatcher {
             new ConcreteDateMatcher('.', List.of(2, 2, 4))
     );
 
-    public boolean matches(String value) {
+    private static final Map<String, ConcreteDateMatcher> matcherMap = Map.of(
+            "dd.MM.yyyy", new ConcreteDateMatcher('.', List.of(2, 2, 4)),
+            "dd-MM-yyyy", new ConcreteDateMatcher('-', List.of(2, 2, 4)),
+            "dd/MM/yyyy", new ConcreteDateMatcher('/', List.of(2, 2, 4))
+    );
 
-        for(ConcreteDateMatcher matcher : matchers) {
-            if (matcher.matches(value)) return true;
+    /**
+     *
+     * @param stringValue string to check if is date
+     * @return pattern if is date or @null if is not date
+     */
+    public String matches(String stringValue) {
+
+
+        for (String key : matcherMap.keySet()) {
+            if (matcherMap.get(key).matches(stringValue)) {
+                return key;
+            }
         }
-
-        return false;
+        return null;
     }
 }
